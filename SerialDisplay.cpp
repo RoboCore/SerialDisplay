@@ -336,6 +336,22 @@ boolean SerialDisplay::On(byte display){
 
 // ----------------------------------------------------------------------------------------------------
 
+// Print a character
+byte SerialDisplay::Print(char c, byte display, boolean send){
+  byte toprint = toByteMask(c);
+  
+  // check if valid value
+  if(toprint != 0){
+    Set(toprint, display, send);
+    return true;
+  }
+  
+  return false;
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+// Scroll an array of characters
 boolean SerialDisplay::Scroll(byte *array, byte array_length, word interval){
   // check parameters
   if((array_length == 0) || (interval == 0))
@@ -481,6 +497,56 @@ void SerialDisplay::Write(void){
 }
 
 // ----------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------
+
+// Convert a char to printable byte
+//  (returns 0 on failure)
+byte SerialDisplay::toByteMask(char c){
+  byte res = 0;
+  switch(c){
+    case 0:  res = SerialDisplay::CHAR_0;  break;
+    case 1:  res = SerialDisplay::CHAR_1;  break;
+    case 2:  res = SerialDisplay::CHAR_2;  break;
+    case 3:  res = SerialDisplay::CHAR_3;  break;
+    case 4:  res = SerialDisplay::CHAR_4;  break;
+    case 5:  res = SerialDisplay::CHAR_5;  break;
+    case 6:  res = SerialDisplay::CHAR_6;  break;
+    case 7:  res = SerialDisplay::CHAR_7;  break;
+    case 8:  res = SerialDisplay::CHAR_8;  break;
+    case 9:  res = SerialDisplay::CHAR_9;  break;
+    
+    case '0':  res = SerialDisplay::CHAR_0;  break;
+    case '1':  res = SerialDisplay::CHAR_1;  break;
+    case '2':  res = SerialDisplay::CHAR_2;  break;
+    case '3':  res = SerialDisplay::CHAR_3;  break;
+    case '4':  res = SerialDisplay::CHAR_4;  break;
+    case '5':  res = SerialDisplay::CHAR_5;  break;
+    case '6':  res = SerialDisplay::CHAR_6;  break;
+    case '7':  res = SerialDisplay::CHAR_7;  break;
+    case '8':  res = SerialDisplay::CHAR_8;  break;
+    case '9':  res = SerialDisplay::CHAR_9;  break;
+    
+    
+    case 'A':  res = SerialDisplay::CHAR_A;  break;
+    case 'B':  res = SerialDisplay::CHAR_B;  break;
+    case 'C':  res = SerialDisplay::CHAR_C;  break;
+    case 'D':  res = SerialDisplay::CHAR_D;  break;
+    case 'E':  res = SerialDisplay::CHAR_E;  break;
+    case 'F':  res = SerialDisplay::CHAR_F;  break;
+    
+    case 'a':  res = SerialDisplay::CHAR_A;  break;
+    case 'b':  res = SerialDisplay::CHAR_B;  break;
+    case 'c':  res = SerialDisplay::CHAR_C;  break;
+    case 'd':  res = SerialDisplay::CHAR_D;  break;
+    case 'e':  res = SerialDisplay::CHAR_E;  break;
+    case 'f':  res = SerialDisplay::CHAR_F;  break;
+    
+    case '-':  res = SerialDisplay::CHAR_SEPARATOR;  break;
+  }
+  
+  return res;
+}
+
 // ----------------------------------------------------------------------------------------------------
 
 // Send the data

@@ -9,10 +9,10 @@
   
 */
 
-#include "SerialDisplay.h"
+#include <SerialDisplay.h>
 
 const int pinOE = 6;
-SerialDisplay displays(4,5,4); // (data, clock)
+SerialDisplay displays(4,5,4); // (data, clock, number of modules)
 int pwm = 0;
 
 void setup(){

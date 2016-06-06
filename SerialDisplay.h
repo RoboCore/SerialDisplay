@@ -99,6 +99,7 @@ class SerialDisplay {
     boolean noDot(byte display = 1);
     boolean Off(byte display);
     boolean On(byte display);
+    boolean Print(char c, byte display = 1, boolean send = true);
     boolean Scroll(byte *array, byte array_length, word interval);
     boolean Set(byte mask, byte display = 1, boolean send = true);
     boolean setBrightnessPin(int pin);
@@ -119,7 +120,7 @@ class SerialDisplay {
     unsigned long _blink_next;
     boolean _tosend; // TRUE if data to send
     
-    // Send the data
+    byte toByteMask(char c);
     void Send(void);
   
 };
