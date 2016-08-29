@@ -76,7 +76,7 @@ class SerialDisplay {
     static const byte CHAR_6 = (PIN_A | PIN_C | PIN_D | PIN_E | PIN_F | PIN_G);
     static const byte CHAR_7 = (PIN_A | PIN_B | PIN_C);
     static const byte CHAR_8 = (PIN_A | PIN_B | PIN_C | PIN_D | PIN_E | PIN_F | PIN_G);
-    static const byte CHAR_9 = (PIN_A | PIN_B | PIN_C | PIN_F | PIN_G);
+    static const byte CHAR_9 = (PIN_A | PIN_B | PIN_C | PIN_D | PIN_F | PIN_G);
     static const byte CHAR_A = (PIN_A | PIN_B | PIN_C | PIN_E | PIN_F | PIN_G);
     static const byte CHAR_B = (PIN_C | PIN_D | PIN_E | PIN_F | PIN_G);
     static const byte CHAR_C = (PIN_A | PIN_D | PIN_E | PIN_F);

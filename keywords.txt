@@ -2,6 +2,7 @@
 SerialDisplay	KEYWORD1
 
 Blink	KEYWORD2
+Brightness	KEYWORD2
 Cascade	KEYWORD2
 Dot	KEYWORD2
 GetData	KEYWORD2
@@ -14,6 +15,7 @@ On	KEYWORD2
 Print	KEYWORD2
 Scroll	KEYWORD2
 Set	KEYWORD2
+setBrightnessPin	KEYWORD2
 SetPin	KEYWORD2
 Update	KEYWORD2
 Write	KEYWORD2
