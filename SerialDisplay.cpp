@@ -72,7 +72,7 @@ boolean SerialDisplay::Blink(word interval, byte display){
   // check if turn OFF
   if(interval == 0){
     if(display == 0){
-      for(int i=0 ; i < (_display_qty - 1) ; i++)
+      for(int i=0 ; i < _display_qty ; i++)
         _state[i] &= ~SERIAL_DISPLAY_BLINK; // reset
     } else {
       _state[display - 1] &= ~SERIAL_DISPLAY_BLINK; // reset
@@ -82,7 +82,7 @@ boolean SerialDisplay::Blink(word interval, byte display){
   } else {
     // turn ON
     if(display == 0){
-      for(int i=0 ; i < (_display_qty - 1) ; i++)
+      for(int i=0 ; i < _display_qty ; i++)
         _state[i] |= SERIAL_DISPLAY_BLINK; // reset
     } else {
       _state[display - 1] |= SERIAL_DISPLAY_BLINK; // reset
@@ -125,7 +125,7 @@ void SerialDisplay::Cascade(byte type, word interval){
   byte temp[SERIAL_DISPLAY_MAX_DISPLAYS];
   
   // copy the data
-  for(int i=0 ; i < (_display_qty - 1) ; i++)
+  for(int i=0 ; i < _display_qty ; i++)
     temp[i] = _data[i];
   
   // cascade
@@ -139,7 +139,7 @@ void SerialDisplay::Cascade(byte type, word interval){
       case 4:  mask |= (type == SERIAL_DISPLAY_CASCADE_UP) ? PIN_A : (PIN_D | PIN_P);            break;
     }
     
-    for(int d=0 ; d < (_display_qty - 1) ; d++){
+    for(int d=0 ; d < _display_qty ; d++){
       _data[d] = temp[d] & mask;
     }
     
@@ -470,7 +470,7 @@ void SerialDisplay::Update(void){
   // check blink
   if(_blink_next > 0){
     if(millis() > _blink_next){
-      for(int i=0 ; i < (_display_qty - 1) ; i++){
+      for(int i=0 ; i < _display_qty ; i++){
         if(_state[i] & SERIAL_DISPLAY_BLINK){
           if(_state[i] & SERIAL_DISPLAY_ON)
             _state[i] &= ~SERIAL_DISPLAY_ON;
