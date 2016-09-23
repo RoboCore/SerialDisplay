@@ -1,7 +1,7 @@
 
 /*
 	   RoboCore Serial Display Library
-		    (v1.0 - 25/05/2016)
+		    (v1.0 - 23/09/2016)
 
   Serial Display functions for Arduino
     (tested with Arduino 1.0.1)
@@ -337,7 +337,7 @@ boolean SerialDisplay::On(byte display){
 // ----------------------------------------------------------------------------------------------------
 
 // Print a character
-byte SerialDisplay::Print(char c, byte display, boolean send){
+boolean SerialDisplay::Print(char c, byte display, boolean send){
   byte toprint = toByteMask(c);
   
   // check if valid value

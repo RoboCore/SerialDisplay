@@ -3,7 +3,7 @@
 
 /*
 	   RoboCore Serial Display Library
-		    (v1.0 - 25/05/2016)
+		    (v1.0 - 23/09/2016)
 
   Serial Display functions for Arduino
     (tested with Arduino 1.0.1)
