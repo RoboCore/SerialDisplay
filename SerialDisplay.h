@@ -3,12 +3,13 @@
 
 /*
 	   RoboCore Serial Display Library
-		    (v1.0 - 23/09/2016)
+		    (v1.1 - 05/04/2018)
 
   Serial Display functions for Arduino
     (tested with Arduino 1.0.1)
 
-  Copyright 2016 RoboCore (François) ( http://www.RoboCore.net )
+  Copyright 2018 RoboCore ( http://www.RoboCore.net )
+    - François;
   
   ------------------------------------------------------------------------------
   This program is free software: you can redistribute it and/or modify
@@ -33,16 +34,25 @@
 
 #define SERIAL_DISPLAY_MAX_DISPLAYS 10
 
+#if defined(ARDUINO_ESP8266_GENERIC) || defined(ARDUINO_ESP8266_NODEMCU) || defined(ARDUINO_ESP8266_THING)
+// ESP8266 Generic / NodeMCU / Sparkfun The Thing
+#define SERIAL_DISPLAY_DELAY_DATA           5 // [µs]
+#define SERIAL_DISPLAY_DELAY_CLOCK_HIGH     5 // [µs]
+#define SERIAL_DISPLAY_DELAY_CLOCK_LOW     20 // [µs]
+#define SERIAL_DISPLAY_DELAY_LATCH       3200 // [µs]
+#else
 #define SERIAL_DISPLAY_DELAY_DATA           5 // [µs]
 #define SERIAL_DISPLAY_DELAY_CLOCK_HIGH     5 // [µs]
 #define SERIAL_DISPLAY_DELAY_CLOCK_LOW     20 // [µs]
 #define SERIAL_DISPLAY_DELAY_LATCH       1100 // [µs]
+#endif
 
 #define SERIAL_DISPLAY_OFF      0
 #define SERIAL_DISPLAY_ON       1
 #define SERIAL_DISPLAY_BLINK    0x10
 #define SERIAL_DISPLAY_NONE     0xFF
 
+#define SERIAL_DISPLAY_INVERT_NONE     0x00
 #define SERIAL_DISPLAY_INVERT_CHAR     0x01
 #define SERIAL_DISPLAY_INVERT_DISPLAY  0x02
 #define SERIAL_DISPLAY_INVERT_BOTH     (SERIAL_DISPLAY_INVERT_CHAR | SERIAL_DISPLAY_INVERT_DISPLAY)
@@ -95,10 +105,14 @@ class SerialDisplay {
 #ifdef SERIAL_DISPLAY_DEBUG
     void Info(HardwareSerial *stream, byte format = HEX);
 #endif
-    void Invert(byte type = SERIAL_DISPLAY_INVERT_BOTH, boolean keep = true);
+    void Invert(byte type = SERIAL_DISPLAY_INVERT_BOTH);
+//    void Invert(byte type = SERIAL_DISPLAY_INVERT_BOTH, boolean keep = true);
     boolean noDot(byte display = 1);
     boolean Off(byte display);
     boolean On(byte display);
+    boolean Print(int value);
+    boolean Print(word value);
+    boolean Print(unsigned long value);
     boolean Print(char c, byte display = 1, boolean send = true);
     boolean Scroll(byte *array, byte array_length, word interval);
     boolean Set(byte mask, byte display = 1, boolean send = true);
@@ -119,6 +133,10 @@ class SerialDisplay {
     word _blink_interval;
     unsigned long _blink_next;
     boolean _tosend; // TRUE if data to send
+    
+    
+    void InvertChar(byte display);
+    void InvertDisplays(void);
     
     byte toByteMask(char c);
     void Send(void);

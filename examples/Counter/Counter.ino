@@ -1,6 +1,6 @@
 /*
       RoboCore - Serial Display example
-                    (06/06/2016)
+                    (05/04/2018)
 
   Written by François.
   
@@ -24,7 +24,7 @@ void setup(){
 
 void loop(){
   if(count < 10){
-    displays.Print(count);
+    displays.Print(count,1);
     count++;
   } else {
     displays.Off(1);

@@ -1,11 +1,12 @@
 
-	RoboCore Serial Display Library
-		(v1.0 - 25/05/2016)
+	   RoboCore Serial Display Library
+		    (v1.1 - 05/04/2018)
 
   Serial Display functions for Arduino
     (tested with Arduino 1.0.1)
 
-  Copyright 2016 RoboCore (François) ( http://www.RoboCore.net )
+  Copyright 2018 RoboCore ( http://www.RoboCore.net )
+    - François;
   
   ------------------------------------------------------------------------------
   This program is free software: you can redistribute it and/or modify
