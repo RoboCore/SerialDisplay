@@ -227,77 +227,6 @@ void SerialDisplay::Invert(byte type){
   _inverted = type;
 }
 
-
-//void SerialDisplay::Invert(byte type, boolean keep){
-//  byte temp;
-//  int qty;
-//  
-//  // check if an update is needed
-//  if(type != _inverted)
-//    _tosend = true;
-//  
-//  // reset
-//  if(type & SERIAL_DISPLAY_INVERT_NONE){
-//    _inverted = SERIAL_DISPLAY_INVERT_NONE; // reset
-//  }
-//  
-//  // invert modules
-//  if(type & SERIAL_DISPLAY_INVERT_DISPLAY){
-//    qty = _display_qty / 2; // for ODD & EVEN
-//    for(int i=0 ; i < qty ; i++){
-//      // data
-//      temp = _data[i];
-//      _data[i] = _data[_display_qty - 1 - i];
-//      _data[_display_qty - 1 - i] = temp;
-//      
-//      // state
-//      temp = _state[i];
-//      _state[i] = _state[_display_qty - 1 - i];
-//      _state[_display_qty - 1 - i] = temp;
-//    }
-//    
-//    // update field
-//    if(keep){
-////      if(_inverted & SERIAL_DISPLAY_INVERT_DISPLAY)
-////        _inverted &= ~SERIAL_DISPLAY_INVERT_DISPLAY;
-////      else
-//        _inverted |= SERIAL_DISPLAY_INVERT_DISPLAY;
-//    }
-//  }
-//  
-//  // invert characters
-//  if(type & SERIAL_DISPLAY_INVERT_CHAR){
-//    qty = _display_qty - 1;
-//    for(int i=0 ; i < qty ; i++){
-//      temp = _data[i] & (PIN_G | PIN_P);
-//      if(_data[i] & PIN_A)
-//        temp |= PIN_D;
-//      if(_data[i] & PIN_B)
-//        temp |= PIN_E;
-//      if(_data[i] & PIN_C)
-//        temp |= PIN_F;
-//      if(_data[i] & PIN_D)
-//        temp |= PIN_A;
-//      if(_data[i] & PIN_E)
-//        temp |= PIN_B;
-//      if(_data[i] & PIN_F)
-//        temp |= PIN_C;
-//      
-//      _data[i] = temp;
-//    }
-//    
-//    // update field
-//    if(keep){
-////      if(_inverted & SERIAL_DISPLAY_INVERT_CHAR)
-////        _inverted &= ~SERIAL_DISPLAY_INVERT_CHAR;
-////      else
-//        _inverted |= SERIAL_DISPLAY_INVERT_CHAR;
-//    }
-//  }
-//  
-////  Send(); // write to the displays
-//}
-
 // ----------------------------------------------------------------------------------------------------
 
 // Turn the dot OFF
@@ -392,13 +321,6 @@ boolean SerialDisplay::Print(unsigned long value){
     } else {
       toprint = value % 10;
       Print(toprint,i,false);
-      
-//      toprint = toByteMask(toprint);
-//      // check if valid value
-//      if(toprint != 0){
-//        Set(toprint, i, false);
-//      }
-      
       value /= 10; // update
     }
   }
@@ -473,25 +395,6 @@ boolean SerialDisplay::Set(byte mask, byte display, boolean send){
   // check index
   if((display == 0) || (display > _display_qty))
     return false;
-  
-//  // invert char if necessary
-//  if(_inverted & SERIAL_DISPLAY_INVERT_CHAR){
-//    byte temp = mask & (PIN_G | PIN_P);
-//    if(mask & PIN_A)
-//      temp |= PIN_D;
-//    if(mask & PIN_B)
-//      temp |= PIN_E;
-//    if(mask & PIN_C)
-//      temp |= PIN_F;
-//    if(mask & PIN_D)
-//      temp |= PIN_A;
-//    if(mask & PIN_E)
-//      temp |= PIN_B;
-//    if(mask & PIN_F)
-//      temp |= PIN_C;
-//    
-//    mask = temp;
-//  }
   
   _data[display - 1] = mask;
   _state[display - 1] |= SERIAL_DISPLAY_ON;

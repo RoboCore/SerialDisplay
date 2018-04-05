@@ -106,7 +106,6 @@ class SerialDisplay {
     void Info(HardwareSerial *stream, byte format = HEX);
 #endif
     void Invert(byte type = SERIAL_DISPLAY_INVERT_BOTH);
-//    void Invert(byte type = SERIAL_DISPLAY_INVERT_BOTH, boolean keep = true);
     boolean noDot(byte display = 1);
     boolean Off(byte display);
     boolean On(byte display);
@@ -134,10 +133,8 @@ class SerialDisplay {
     unsigned long _blink_next;
     boolean _tosend; // TRUE if data to send
     
-    
     void InvertChar(byte display);
     void InvertDisplays(void);
-    
     byte toByteMask(char c);
     void Send(void);
   
